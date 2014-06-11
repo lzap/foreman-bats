@@ -69,6 +69,14 @@ setup() {
     rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-$EPEL_REL.noarch.rpm
 }
 
+@test "install puppet from backports" {
+  tSetOSVersion
+  (tIsDebianCompatible && [[ $OS_VERSION == "6" ]]) || skip "this is needed only on Debian 6"
+  echo 'deb http://ftp.uk.debian.org/debian-backports squeeze-backports main' > /etc/apt/sources.list.d/backports.list
+  apt-get update
+  apt-get -t squeeze-backports install puppet
+}
+
 @test "configure repository" {
   if tIsRedHatCompatible; then
     rpm -q foreman-release || yum -y install $FOREMAN_URL

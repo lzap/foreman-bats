@@ -169,3 +169,8 @@ EOP
     --puppet-ca-proxy-id 1 \
     --environment production
 }
+
+@test "make sure VNC ports are open" {
+  iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 5910:5930 -j ACCEPT
+}
+

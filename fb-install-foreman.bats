@@ -141,7 +141,10 @@ EOF
   if [ x$FOREMAN_VERSION = "x1.5" -o x$FOREMAN_VERSION = "x1.4" ]; then
     foreman-installer $args
   else
-    foreman-installer --foreman-admin-password=admin $args
+    foreman-installer \
+      --foreman-admin-password=admin \
+      --foreman-websockets-encrypt=false \
+      $args
   fi
 }
 
